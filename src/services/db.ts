@@ -167,6 +167,8 @@ export interface AuthResponse {
   providedName?: string
 }
 
+import { SECRET_CONFESSION_MESSAGE, AUTHORIZED_PARTNER_NAME } from '../data/secretMessage'
+
 export async function authenticateUser(name: string): Promise<AuthResponse> {
   try {
     const res = await fetch('/api/authentication', {
@@ -183,8 +185,8 @@ export async function authenticateUser(name: string): Promise<AuthResponse> {
     if (isMatch) {
       return {
         authenticated: true,
-        authorizedName: 'HimaVarshini',
-        secretMessage: 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart. Every heartbeat in this world was created just for you.',
+        authorizedName: AUTHORIZED_PARTNER_NAME,
+        secretMessage: SECRET_CONFESSION_MESSAGE,
         statusMessage: 'Identity verified for HimaVarshini. Core unlocked!'
       }
     } else {
