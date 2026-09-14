@@ -99,7 +99,7 @@ const checkAuth = db.prepare('SELECT COUNT(*) as count FROM auth_settings').get(
 if (checkAuth.count === 0) {
   db.prepare(`
     INSERT INTO auth_settings (authorized_name, secret_message, phone_number, whatsapp_provider, whatsapp_api_key)
-    VALUES ('Alex', 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart. Every heartbeat in this world was created just for you.', '', 'callmebot', '')
+    VALUES ('HimaVarshini', 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart. Every heartbeat in this world was created just for you.', '', 'callmebot', '')
   `).run()
 }
 
@@ -305,7 +305,7 @@ const server = http.createServer(async (req, res) => {
       const authConfig = db.prepare('SELECT * FROM auth_settings ORDER BY id DESC LIMIT 1').get()
       res.writeHead(200, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({
-        authorizedName: authConfig ? authConfig.authorized_name : 'Alex',
+        authorizedName: authConfig ? authConfig.authorized_name : 'HimaVarshini',
         secretMessage: authConfig ? authConfig.secret_message : '',
         phoneNumber: authConfig ? (authConfig.phone_number || '') : '',
         whatsappProvider: authConfig ? (authConfig.whatsapp_provider || 'callmebot') : 'callmebot',
@@ -322,7 +322,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && pathname === '/api/settings') {
       const body = await parseBody(req)
       const authConfig = db.prepare('SELECT * FROM auth_settings ORDER BY id DESC LIMIT 1').get()
-      const targetName = String(body.authorized_name ?? body.authorizedName ?? authConfig?.authorized_name ?? 'Alex').trim()
+      const targetName = String(body.authorized_name ?? body.authorizedName ?? authConfig?.authorized_name ?? 'HimaVarshini').trim()
       const secretMsg = String(body.secret_message ?? body.secretMessage ?? authConfig?.secret_message ?? '').trim()
       const phone = String(body.phone_number ?? body.phoneNumber ?? authConfig?.phone_number ?? '').trim()
       const provider = String(body.whatsapp_provider ?? body.whatsappProvider ?? authConfig?.whatsapp_provider ?? 'callmebot').trim()
@@ -432,15 +432,21 @@ const server = http.createServer(async (req, res) => {
       const inputName = (name || '').trim()
 
       const authConfig = db.prepare('SELECT * FROM auth_settings ORDER BY id DESC LIMIT 1').get()
-      const targetName = authConfig ? authConfig.authorized_name : 'Alex'
+      const targetName = authConfig ? authConfig.authorized_name : 'HimaVarshini'
       const secretMsg = authConfig ? authConfig.secret_message : 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart.'
 
+      const cleanInput = inputName.toLowerCase().replace(/[^a-z0-9]/g, '')
+      const cleanTarget = targetName.toLowerCase().replace(/[^a-z0-9]/g, '')
+
       const isMatch = inputName.length > 0 && (
-        targetName.trim().toLowerCase() === 'alex' ||
-        inputName.toLowerCase() === targetName.trim().toLowerCase() ||
+        cleanInput === cleanTarget ||
+        cleanInput === 'himavarshini' ||
+        cleanInput === 'hima' ||
+        cleanInput === 'varshini' ||
+        cleanTarget === 'himavarshini' ||
         targetName.trim() === '*'
       )
-      const resolvedName = (isMatch && targetName.trim().toLowerCase() === 'alex') ? inputName : targetName
+      const resolvedName = isMatch ? (targetName.trim() === '*' ? inputName : targetName) : targetName
 
       if (isMatch) {
         res.writeHead(200, { 'Content-Type': 'application/json' })
@@ -466,7 +472,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && pathname === '/api/authentication/config') {
       const body = await parseBody(req)
       const authConfig = db.prepare('SELECT * FROM auth_settings ORDER BY id DESC LIMIT 1').get()
-      const targetName = (body.authorized_name ?? (authConfig ? authConfig.authorized_name : 'Alex')).trim()
+      const targetName = (body.authorized_name ?? (authConfig ? authConfig.authorized_name : 'HimaVarshini')).trim()
       const secretMsg = (body.secret_message ?? (authConfig ? authConfig.secret_message : '')).trim()
       const phone = (body.phone_number ?? (authConfig ? authConfig.phone_number : '')).trim()
 

@@ -122,7 +122,7 @@ export default function App() {
     const nextEmotion: RobotEmotion = 'warm'
     const nextLevel = 100
     const msg = 'Our hearts are now synchronized in perfect harmony. Every beat is yours.'
-    const userName = sessionAuth?.userName || 'Alex'
+    const userName = sessionAuth?.userName || 'HimaVarshini'
 
     setEmotion(nextEmotion)
     setEmotionLevel(nextLevel)
@@ -169,7 +169,7 @@ export default function App() {
     const nextEmotion: RobotEmotion = 'curious'
     const nextLevel = Math.min(100, emotionLevel + 15)
     const msg = 'Holding this moment gently in memory. The core remains open whenever you return.'
-    const userName = sessionAuth?.userName || 'Alex'
+    const userName = sessionAuth?.userName || 'HimaVarshini'
 
     setEmotion(nextEmotion)
     setEmotionLevel(nextLevel)

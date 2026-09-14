@@ -10,7 +10,7 @@ interface SettingsModalProps {
 
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const [phoneNumber, setPhoneNumber] = useState('')
-  const [authorizedName, setAuthorizedName] = useState('Alex')
+  const [authorizedName, setAuthorizedName] = useState('HimaVarshini')
   const [secretMessage, setSecretMessage] = useState('')
   const [whatsappProvider, setWhatsappProvider] = useState<'callmebot' | 'webhook' | 'twilio'>('callmebot')
   const [whatsappApiKey, setWhatsappApiKey] = useState('')
@@ -321,7 +321,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <label className="settings-label">👤 AUTHORIZED PARTNER NAME</label>
             <input
               type="text"
-              placeholder="e.g. Alex"
+              placeholder="e.g. HimaVarshini"
               value={authorizedName}
               onChange={(e) => setAuthorizedName(e.target.value)}
               className="input-field auth-input"

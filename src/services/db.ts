@@ -178,11 +178,12 @@ export async function authenticateUser(name: string): Promise<AuthResponse> {
     return data
   } catch {
     // Fallback if backend API server is offline
-    const isMatch = name.trim().toLowerCase() === 'alex' || name.trim().toLowerCase() === 'heart'
+    const clean = name.trim().toLowerCase().replace(/[^a-z0-9]/g, '')
+    const isMatch = clean === 'himavarshini' || clean === 'hima' || clean === 'varshini' || clean === 'alex' || clean === 'heart'
     if (isMatch) {
       return {
         authenticated: true,
-        authorizedName: name,
+        authorizedName: name.trim() || 'HimaVarshini',
         secretMessage: 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart. Every heartbeat in this world was created just for you.',
         statusMessage: `Identity verified for ${name}. Core unlocked!`
       }
@@ -280,7 +281,7 @@ export async function fetchSettings(): Promise<SettingsData> {
     }
   } catch {}
   return {
-    authorizedName: 'Alex',
+    authorizedName: 'HimaVarshini',
     secretMessage: '',
     phoneNumber: '',
     whatsappProvider: 'callmebot',

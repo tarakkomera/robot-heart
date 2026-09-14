@@ -67,7 +67,7 @@ export function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalProps) {
             <div className="form-group">
               <input
                 type="text"
-                placeholder="Enter your name (e.g. Alex)..."
+                placeholder="Enter your name (e.g. HimaVarshini)..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 autoFocus
