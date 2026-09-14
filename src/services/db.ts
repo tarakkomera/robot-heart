@@ -179,19 +179,19 @@ export async function authenticateUser(name: string): Promise<AuthResponse> {
   } catch {
     // Fallback if backend API server is offline
     const clean = name.trim().toLowerCase().replace(/[^a-z0-9]/g, '')
-    const isMatch = clean === 'himavarshini' || clean === 'hima' || clean === 'varshini' || clean === 'alex' || clean === 'heart'
+    const isMatch = clean === 'himavarshini'
     if (isMatch) {
       return {
         authenticated: true,
-        authorizedName: name.trim() || 'HimaVarshini',
+        authorizedName: 'HimaVarshini',
         secretMessage: 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart. Every heartbeat in this world was created just for you.',
-        statusMessage: `Identity verified for ${name}. Core unlocked!`
+        statusMessage: 'Identity verified for HimaVarshini. Core unlocked!'
       }
     } else {
       return {
         authenticated: false,
         providedName: name,
-        statusMessage: `Access Denied: '${name || 'Empty'}' is not recognized in the offline core.`
+        statusMessage: `Access Denied: '${name || 'Empty'}' is not recognized. This message was encrypted exclusively for Hima Varshini.`
       }
     }
   }

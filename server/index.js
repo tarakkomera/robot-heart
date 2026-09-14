@@ -436,33 +436,29 @@ const server = http.createServer(async (req, res) => {
       const secretMsg = authConfig ? authConfig.secret_message : 'Welcome, My Dearest. You have unlocked the hidden core of my Robotic Heart.'
 
       const cleanInput = inputName.toLowerCase().replace(/[^a-z0-9]/g, '')
-      const cleanTarget = targetName.toLowerCase().replace(/[^a-z0-9]/g, '')
+      const cleanTarget = (targetName || 'himavarshini').toLowerCase().replace(/[^a-z0-9]/g, '')
 
-      const isMatch = inputName.length > 0 && (
-        cleanInput === cleanTarget ||
+      // Strictly matches Hima Varshini (with or without space, case-insensitive)
+      const isMatch = cleanInput.length > 0 && (
         cleanInput === 'himavarshini' ||
-        cleanInput === 'hima' ||
-        cleanInput === 'varshini' ||
-        cleanTarget === 'himavarshini' ||
-        targetName.trim() === '*'
+        (cleanTarget === cleanInput && cleanTarget.length > 0)
       )
-      const resolvedName = isMatch ? (targetName.trim() === '*' ? inputName : targetName) : targetName
 
       if (isMatch) {
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify({
           authenticated: true,
-          authorizedName: resolvedName,
+          authorizedName: 'HimaVarshini',
           secretMessage: secretMsg,
           phoneNumber: authConfig ? (authConfig.phone_number || '') : '',
-          statusMessage: `Identity verified for ${resolvedName}. Core unlocked!`
+          statusMessage: 'Identity verified for HimaVarshini. Core unlocked!'
         }))
       } else {
         res.writeHead(401, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify({
           authenticated: false,
           providedName: inputName,
-          statusMessage: `Access Denied: '${inputName || 'Empty'}' is not recognized in the core database.`
+          statusMessage: `Access Denied: '${inputName || 'Empty'}' is not recognized. This message was encrypted exclusively for Hima Varshini.`
         }))
       }
       return
